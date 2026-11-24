@@ -34,7 +34,7 @@ The long-form numbers here (1 to 23) are finer than the S-rules in SKILL.md. The
 > The configuration file, which is loaded at startup and can be overridden by environment variables, controls the cache size as well as the timeout, and should be kept in version control.
 
 **After:**
-> The configuration file controls the cache size and the timeout. The application reads this file when it starts. Environment variables can override the values in the file. Keep the file in version control.
+> The configuration file controls the cache size and the timeout. It loads at startup. Environment variables can override it. You should keep it in version control.
 
 ### 2. Keep sentences short
 
@@ -79,10 +79,10 @@ In 80% mode, terse fragments are acceptable in tables, headings and short UI lab
 **Rule:** Name who does the action. Use the passive only in descriptions where the actor is unknown or not important.
 
 **Before:**
-> The token is validated by the gateway before the request is forwarded.
+> The token is validated by the gateway. Then the request is forwarded to the API by the gateway.
 
 **After:**
-> The gateway validates the token. Then it sends the request to the server.
+> The gateway validates the token. Then it forwards the request to the API.
 
 ### 8. Use simple tenses only
 
@@ -113,9 +113,9 @@ In 80% mode, terse fragments are acceptable in tables, headings and short UI lab
 
 ### 11. Avoid modal hedging
 
-**Rule:** STE uses "can" for possibility and ability, "must" for obligation, and "will" for the future. Replace "may", "might", "could", "should", "shall" and "would" with one of these, with the same strength of meaning.
+**Rule:** STE uses "can" for possibility and ability, "must" for obligation, and "will" for the future. These are not interchangeable with advice, permission or conditional outcomes. Use the contextual guidance in [word-swaps.md](word-swaps.md#5-modal-verbs).
 
-Be careful here. If the source is uncertain, keep the uncertainty. "This might fail" becomes "This can fail" or "Possibly, this fails", not "This fails".
+The fidelity rules in SKILL.md take priority. Keep the original modal if a faithful rewrite is unclear, even in Strict mode.
 
 ### 12. No phrasal verbs
 

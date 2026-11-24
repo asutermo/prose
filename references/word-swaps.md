@@ -5,7 +5,7 @@ Plain alternatives for words that STE does not approve, or that make prose heavy
 How to use this list:
 
 - **80% mode:** use the swap when it reads naturally. Keep the original word if the swap sounds odd or changes the meaning.
-- **Strict mode:** use the swap. If a word-for-word swap breaks the sentence, rebuild the sentence (STE rule 9.1).
+- **Strict mode:** rebuild the sentence when a swap changes its meaning. The fidelity rules in SKILL.md take priority over vocabulary rules.
 - Many words have more than one alternative. Pick by context.
 
 ## Contents
@@ -85,13 +85,13 @@ How to use this list:
 
 | Instead of | Write |
 |---|---|
-| shall, should (obligation) | must |
-| should (advice) | we recommend that you ..., or the imperative |
-| may (permission) | can |
-| may, might, could (possibility) | can, possibly |
-| would | will, or rewrite in the present tense |
+| shall (obligation) | must, only when the source requires the action |
+| should (advice) | we recommend that you ... (advice, not a command) |
+| may (permission) | can, or is permitted to ... |
+| may, might, could (possibility) | possibly, or keep the original modal. Use "can" only for a general possibility ("The request can time out"). |
+| would (conditional) | keep the condition and conditional outcome |
 
-Keep the strength of the original. Do not turn "might" into a certain statement.
+Keep the original modal when a faithful rewrite is unclear. Do not turn advice into obligation or a conditional outcome into a promise.
 
 ## 6. Connectors and adverbs
 

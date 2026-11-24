@@ -55,13 +55,21 @@ SWAPS = {
 }
 
 STRICT_ONLY_SWAPS = {
-    "need": "necessary (adj)", "may": "can", "might": "can", "could": "can",
-    "should": "must", "shall": "must", "would": "will", "since": "because",
+    "need": "necessary (adj)", "since": "because",
     "both": "the two", "further": "more", "additional": "more",
     "acceptable": "permitted", "main": "primary", "portion": "part",
     "required": "necessary", "insert": "put", "rotate": "turn",
     "avoid": "prevent", "follow": "obey", "inspect": "examine",
     "e.g.": "for example", "i.e.": "that is", "etc.": "and other",
+}
+
+STRICT_MODAL_ADVICE = {
+    "may": "preserve permission or uncertainty; do not replace with ability or certainty",
+    "might": "preserve uncertainty; do not turn a possibility into a fact",
+    "could": "preserve ability, permission, uncertainty, and conditions as intended",
+    "should": "preserve advice or expectation; do not turn it into an obligation",
+    "shall": "preserve the intended obligation or future meaning; review context before changing",
+    "would": "preserve conditions, uncertainty, and past or hypothetical meaning; do not promise an outcome",
 }
 
 TELLS = [
@@ -254,6 +262,9 @@ def check(text: str, strict: bool) -> list[Finding]:
         swaps = dict(SWAPS)
         if strict:
             swaps.update(STRICT_ONLY_SWAPS)
+            for word, advice in STRICT_MODAL_ADVICE.items():
+                if re.search(rf"\b{word}\b", low):
+                    f.append(Finding(no, "word", f"'{word}': {advice}", line.strip()[:100]))
             if CONTRACTION_RE.search(line):
                 f.append(Finding(no, "contraction", "contraction (not permitted in strict mode)", line.strip()[:100]))
             if re.search(r"\b(?:check|test)(?:s|ed)?\s+(?:the|a|an|that|if|your|all)\b", low):

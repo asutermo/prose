@@ -11,13 +11,13 @@ These are the strongest and most frequent tells. Act on one sighting.
 **Watch for:** not X but Y; not just, not only, not merely X, but Y; it's not X, it's Y; X rather than Y; the same contrast across two sentences ("This doesn't mean X. It means Y."); a clipped negative tail ("..., no guessing"). Every language has this formula. Treat it the same way.
 **Problem:** The negative half names something nobody claimed, so the positive half sounds bigger. It adds weight but no claim. State the point. Keep a contrast only if the reader really believes the X half, or if both halves carry information.
 **Before:**
-> It's not just a faster build tool, it's a new way to think about your pipeline.
+> It's not just a faster build tool, it's a new way to think about your pipeline. It caches each step, so a rebuild after a small change takes seconds.
 **After:**
-> The build tool caches each step, so a rebuild after a small change takes seconds.
+> The faster build tool caches each step, so a rebuild after a small change takes seconds.
 **Before (split across sentences):**
 > This doesn't mean tests are optional. It means the linter catches the easy errors first.
 **After:**
-> The linter catches the easy errors before the tests run.
+> Tests are still required. The linter catches the easy errors first.
 **Before (clipped tail):**
 > The form fills in your address from the postcode, no typing.
 **After:**
@@ -28,11 +28,11 @@ These are the strongest and most frequent tells. Act on one sighting.
 **Watch for:** a one-sentence paragraph that repeats the paragraph before it; "That's the real win."; "That distinction matters."; "Let that sink in."; "Read that again."; the same closer after several sections; a sentence that names what an example just showed ("This shows the importance of..."); a row of fragments ("No setup. No config. No waiting."); one word in ALL CAPS or with periods (every. single. day.).
 **Problem:** The line asks the reader to pause on a claim instead of adding to it. A short sentence is fine when it carries a new fact. Cut a closer that repeats. Merge a row of fragments into one sentence with a real claim.
 **Before:**
-> We moved the API to edge workers. Latency dropped to 40 ms. No cold starts. No regions. No excuses.
+> We moved the API to edge workers. Latency dropped to 40 ms. No cold starts. No regions to configure. No excuses.
 >
 > That's the power of the edge.
 **After:**
-> We moved the API to edge workers. Latency dropped to 40 ms, and cold starts stopped, because the code now runs in every region.
+> We moved the API to edge workers. Latency dropped to 40 ms. There are no cold starts or regions to configure.
 **Before (repeated closer):**
 > Caching cuts repeat work. That's the real win.
 >
@@ -45,7 +45,7 @@ These are the strongest and most frequent tells. Act on one sighting.
 **Watch for:** the real question is, at its core, in reality, what really matters, fundamentally, the deeper issue, the heart of the matter, X is the Y of Z, X becomes a trap, not a tool but a mirror, the language of, the currency of, the architecture of
 **Problem:** An ordinary point is dressed as a hidden truth. The dressing adds no detail. Replace the saying with the specific claim.
 **Before:**
-> At its core, observability is the language of trust between teams.
+> At its core, observability is the language of trust between teams. Shared dashboards let the on-call team see what the API team sees.
 **After:**
 > Shared dashboards let the on-call team see what the API team sees.
 
@@ -54,13 +54,13 @@ These are the strongest and most frequent tells. Act on one sighting.
 **Watch for:** Let's dive in, let's explore, let's break this down, here's what you need to know, now let's look at, without further ado, heads up, quick note, Honestly?, Look, Here's the thing, The thing is, Let's be honest, Real talk
 **Problem:** The writer announces the point instead of making it. Remove the run-up. "Honestly" inside a casual sentence is normal. The tell is the stand-alone opener before a routine claim.
 **Before:**
-> Let's dive into how rate limiting works. Here's what you need to know.
+> Let's dive into how rate limiting works. Here's what you need to know. The API allows 100 requests per minute per key. After that, it returns HTTP 429.
 **After:**
 > The API allows 100 requests per minute per key. After that, it returns HTTP 429.
 **Before (staged candor):**
 > Is the paid plan worth it? Honestly? It depends on your team size.
 **After:**
-> The paid plan pays off for teams of more than five people.
+> Whether the paid plan is worth it depends on your team size.
 
 ### §5. Arguing with no one
 
@@ -69,7 +69,7 @@ These are the strongest and most frequent tells. Act on one sighting.
 **Before:**
 > To be clear, I'm not saying microservices are bad. A tempting approach would be to split everything at once, but that would break the deploy. We split the billing service first.
 **After:**
-> We split the billing service out first.
+> Splitting everything at once would break the deploy. We split the billing service first.
 
 ## B. Rhythm by rule
 
@@ -79,13 +79,13 @@ Shapes and punctuation used everywhere, whether the meaning needs them or not.
 
 **Problem:** Ideas come in threes to sound complete. It can be one phrase ("fast, reliable, and scalable"), three parallel examples, or three short facts and a lesson. Check that each item adds a distinct idea. Keep three only when the meaning has three parts. Two or four is fine. If the list is itself a claim in the source (stated values, named features), keep its content in plainer form. Cutting it drops a fact.
 **Before:**
-> The new dashboard is fast, intuitive, and powerful. It brings clarity, speed, and confidence to your team.
+> The new dashboard has three powerful features: alert search, saved filters, and CSV export.
 **After:**
-> The new dashboard loads in under a second and shows all alerts on one page.
+> The new dashboard has alert search, saved filters, and CSV export.
 **Before (paragraph scale):**
 > A deploy can look clean and fail. A test can pass and hide a bug. A metric can be green and lie. Production rarely explains itself.
 **After:**
-> A deploy can look clean and still fail, and a green test or metric can hide a bug. Production rarely explains itself.
+> A deploy can look clean and still fail. A passing test can hide a bug, and a green metric can be misleading. Production rarely explains itself.
 
 ### §7. Repeated sentence openings
 
@@ -93,7 +93,7 @@ Shapes and punctuation used everywhere, whether the meaning needs them or not.
 **Before:**
 > It reads the config. It checks the schema. It starts the server.
 **After:**
-> It reads the config and checks the schema. Then the server starts.
+> It reads the config, checks the schema and starts the server.
 
 ### §8. Dashes as the universal connector
 
@@ -109,9 +109,9 @@ Shapes and punctuation used everywhere, whether the meaning needs them or not.
 **Watch for:** to be fair, it's also possible, could potentially, might arguably, in some cases it may, this is an inference
 **Problem:** Edit after edit adds qualifiers until every claim sounds unsure. Usually they repair an overstatement, not real doubt. Keep one qualifier when the source supports it. Keep scope statements, legal and safety notes and real corrections. A single "perhaps" or "tends to" is human, not a tell. *Weak alone.* See also S9.
 **Before:**
-> This change could potentially possibly cause some issues in certain edge cases.
+> This change could potentially possibly break requests with empty headers.
 **After:**
-> This change can break requests with empty headers.
+> This change may break requests with empty headers.
 
 ### §10. Hyphenated pairs everywhere
 
@@ -126,7 +126,7 @@ Shapes and punctuation used everywhere, whether the meaning needs them or not.
 
 **Problem:** The text hides who acts, or drops the subject. Name the actor when it makes the action clearer. *Weak alone.* In Pass 2 this is a full rule (S6).
 **Before:**
-> No account needed. Your data is synced automatically.
+> No account needed. Your data is synced automatically by the app.
 **After:**
 > You do not need an account. The app syncs your data automatically.
 
@@ -139,7 +139,7 @@ The fact underneath is usually sound. Keep it and remove the dressing.
 **Watch for:** actually, additionally, align with, bolstered, crucial, deep dive, delve, enduring, enhance, garner, gate/gated (figurative), highlight (verb), interplay, intricate, key (adjective), landscape (abstract), leverage, meticulous, pivotal, quietly, robust (figurative), seamless, showcase, tapestry, testament, underscore (verb), utilize, valuable, vibrant
 **Problem:** Models use these words far more often than people, especially in groups. They are tells wherever they appear. A formal word outside this list is not a tell by itself. STE gives the plain swap: see `references/word-swaps.md`.
 **Before:**
-> Additionally, the new SDK leverages a robust caching layer, showcasing our meticulous commitment to performance across the evolving landscape of mobile development.
+> Additionally, the new SDK leverages a robust caching layer that stores API responses on the device so screens load faster on slow networks, showcasing our meticulous commitment to performance across the evolving landscape of mobile development.
 **After:**
 > The new SDK also caches API responses on the device, so screens load faster on slow networks.
 
@@ -148,7 +148,7 @@ The fact underneath is usually sound. Keep it and remove the dressing.
 **Watch for:** stands as a testament, a pivotal or crucial moment, plays a key role, marking or shaping the, underscores its importance, reflects a broader, lasting legacy, setting the stage for, evolving landscape, indelible mark; "Despite these challenges... continues to thrive"; sections called "Challenges and Legacy" or "Future Outlook"; the future looks bright, exciting times ahead
 **Problem:** An ordinary detail is said to mark a change, prove a legacy or promise a future. It shows up as a phrase, a stock "challenges and outlook" section, or a send-off paragraph. Keep the fact. End on the last concrete fact.
 **Before:**
-> Version 2.0 marks a pivotal moment in the project's journey, reflecting a broader shift toward developer-first tooling.
+> Version 2.0 adds a CLI and drops support for Node 16, marking a pivotal moment in the project's journey and reflecting a broader shift toward developer-first tooling.
 **After:**
 > Version 2.0 adds a CLI and drops support for Node 16.
 **Before (send-off):**
@@ -161,9 +161,9 @@ The fact underneath is usually sound. Keep it and remove the dressing.
 **Watch for:** associated with, in association with, connected to, in connection with, linked to, tied to
 **Problem:** The text says two things are connected but not how. "She is associated with the project" hides whether she founded it, maintains it or once filed a bug. Name the relation the source gives. If the source does not say, keep the vague words. Do not invent a role.
 **Before:**
-> The outage was linked to the DNS change, and the team is associated with the platform group.
+> The outage was linked to the DNS change, and the team is associated with the platform group. The incident report says the change caused the outage by deleting a required DNS record. The org chart places the team within the platform group.
 **After:**
-> The DNS change caused the outage. The team is part of the platform group.
+> The incident report says the DNS change caused the outage by deleting a required DNS record. The org chart places the team within the platform group.
 
 ### §15. Shallow -ing riders
 
@@ -179,7 +179,7 @@ The fact underneath is usually sound. Keep it and remove the dressing.
 **Watch for:** rich (figurative), profound, exemplifies, commitment to, nestled, in the heart of, groundbreaking, renowned, featuring, diverse array, breathtaking, must-try, stunning, world-class, cutting-edge, best-in-class
 **Problem:** The text reads like an ad. State what the thing is and what it does.
 **Before:**
-> Nestled in the heart of your workflow, our groundbreaking editor offers a stunning, world-class writing experience.
+> Nestled in the heart of your workflow, our groundbreaking editor runs inside VS Code and checks spelling as you type, offering a stunning, world-class writing experience.
 **After:**
 > The editor runs inside VS Code and checks spelling as you type.
 
@@ -188,7 +188,7 @@ The fact underneath is usually sound. Keep it and remove the dressing.
 **Watch for:** experts argue, observers have noted, industry reports, some critics, several publications; featured in [list of outlets]; over N followers
 **Problem:** A name or an unnamed authority stands in for what was said. If the source names who said what, use that. Otherwise cut the claim or the list. A missing citation alone is not a tell. Never invent a source.
 **Before:**
-> Experts agree that Rust is the future of systems programming. The project has been featured in TechCrunch, Wired, The Verge and Hacker News.
+> Experts agree that Rust is the future of systems programming. The project is written in Rust. It has been featured in TechCrunch, Wired, The Verge and Hacker News, with a front-page appearance on Hacker News in May.
 **After:**
 > The project is written in Rust. It was on the front page of Hacker News in May.
 
@@ -209,11 +209,11 @@ Templates also produce clean formatting. The tell is decoration on every item.
 
 **Problem:** Words are bold for no reason, and every list item has a bold label and a colon. Remove the bold. Turn a labeled list into prose when the labels add nothing. Keep bold for warnings, UI labels and terms the reader must find again.
 **Before:**
-> - **Performance:** Performance has been significantly improved.
-> - **Security:** Security has been strengthened with encryption.
-> - **Usability:** Usability has been enhanced with a new interface.
+> - **Performance:** Performance has been significantly improved with faster page loads in this release.
+> - **Security:** Security has been strengthened with encryption of stored tokens.
+> - **Usability:** Usability has been enhanced with a new settings page.
 **After:**
-> The release makes pages load faster, encrypts stored tokens and adds a new settings page.
+> The release makes pages load significantly faster, encrypts stored tokens and adds a new settings page.
 
 ### §20. Decorative headings
 
@@ -221,7 +221,7 @@ Templates also produce clean formatting. The tell is decoration on every item.
 **Before:**
 > ## 🚀 Getting Started With The CLI →
 **After:**
-> ## Install the CLI
+> ## Getting started with the CLI
 
 ### §21. Curly quotation marks
 
@@ -249,7 +249,7 @@ Remove these outright. Nothing here needs rewriting.
 **Watch for:** as of [date], up to my last training update, while specific details are limited, based on available information, not publicly available, not widely documented, maintains a low profile, likely [grew up, began], it is believed that
 **Problem:** The text says where the model's knowledge ends, or admits it found no source and then fills the gap with a guess. State what the source does not show, or cut the sentence.
 **Before:**
-> While details about the library's origins are limited, it was likely created around 2015 to address performance concerns.
+> While details about the library's origins are limited and the sources do not give a creation date, it was likely created around 2015 to address performance concerns.
 **After:**
 > The sources do not say when the library was created. (Or cut the sentence.)
 
@@ -272,9 +272,9 @@ Remove these outright. Nothing here needs rewriting.
 **Watch for:** what the text replaced ("was added to replace"); how it was made ("generated from", "compiled from", "anything unconfirmed is flagged"); a layout the reader can see ("the table below compares", "this section is organized by")
 **Problem:** The text describes itself instead of its subject. Mention an old version only in change logs and migration guides. Keep a source credit the reader can follow. Cut the story of how you worked. A single description of the page is *weak alone*.
 **Before:**
-> This function was added to replace the old approach of looping through all users, which caused O(n²) performance.
+> This function was added to replace the old approach of looping through all users, which caused O(n²) performance. It looks up users in a hash map, with O(1) time per lookup on average.
 **After:**
-> This function looks up users in a hash map, so each lookup is O(1).
+> This function looks up users in a hash map, with O(1) time per lookup on average. The old loop through all users took O(n²) time.
 
 ## F. Writing for the wrong reader
 
@@ -287,4 +287,4 @@ A model writes for a reader with no context. A reply in a thread has a reader wh
 **Before:**
 > Yes, you're right that the cron job fails on the first of the month. I looked into it: the job uses the local time zone, and on the first the date math rolls back to the previous month, which has fewer days. I tested it with three dates. So I think we should switch to UTC.
 **After:**
-> Agreed. I'll switch the job to UTC. The local time zone breaks the date math on the first of the month.
+> I think we should switch the job to UTC. The local time zone breaks the date math on the first of the month.

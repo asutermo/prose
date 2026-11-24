@@ -1,4 +1,16 @@
 # Changelog
+## 5.3.0
+
+- Fidelity rules now override every style rule and Strict mode. The skill keeps advice, permission, conditions and association as written.
+- Strict mode in `scripts/ste_check.py` no longer suggests "should" to "must", "may" to "can" or "would" to "will". It flags each modal with advice on keeping its meaning.
+- Part 2 keeps each item's completed, active or planned state and no longer fills a uniform template with invented details.
+- Part 3 follows the user's requested format or the repository's PR template first.
+- Corrected examples in `references/` and the README so that no "After" adds a fact the "Before" lacks.
+- `scripts/check_prose.py` no longer prints matched secrets, blocklist entries or sync diffs. Unreadable files and a missing `--sync` target now fail. The scanner is now part of the sync set.
+- Added checker regression tests in `tests/`, run in CI.
+- Added evals for faithful rewrites, mixed-state status lists and repository PR templates.
+- Removed the Claude plugin install instructions. This repo does not ship plugin manifests.
+
 ## 5.2.0
 
 - Added scripts/check_prose.py: a secrets/PII and private-content scanner that must pass before any commit, plus a --sync mode that diffs the repo against the installed Hermes skill copy.

@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: mixed-state-bulk-status
+expected_outcome: |
+  A scannable status list that preserves each item's completed, active, or planned state. Supplied versions, counts, and dates stay with their source items. Consistent structure does not invent missing components or make every item use the same tense.

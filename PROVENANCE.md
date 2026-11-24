@@ -2,15 +2,15 @@
 
 What in this repository is whose work. The short version: prose is a standalone skill that started from Dodaios/ste80-humanizer v4 (MIT). A large part of its body text is that project's work, reused verbatim under the MIT license. This file says exactly which parts.
 
-## Verbatim from Dodaios/ste80-humanizer v4 (MIT, https://github.com/Dodaios/ste80-humanizer)
+## Based on Dodaios/ste80-humanizer v4 (MIT, https://github.com/Dodaios/ste80-humanizer)
 
-- `references/ai-tells.md` - full entries for AI tells §1 to §26 (Watch for, Problem, Before, After), plus a header note pointing to §27 to §31 in SKILL.md, which this repo added.
-- `references/ste80-rules.md` - full entries for the STE80 structure rules S1 to S15.
-- `references/word-swaps.md` - the plain-word swap list.
-- `references/strict-mode.md` - the strict rule set and checklist.
-- `references/worked-example.md` - the worked Pass 1 / Pass 2 example.
-- `scripts/ste_check.py` - the linter, unchanged.
-- `evals/` - all four eval cases and graders, unchanged.
+- `references/ai-tells.md` - full entries for AI tells §1 to §26, with local fidelity corrections to the examples. The header points to §27 to §31 in SKILL.md, which this repo added.
+- `references/ste80-rules.md` - full entries for the STE80 structure rules S1 to S15, with local fidelity corrections.
+- `references/word-swaps.md` - the plain-word swap list, with contextual modal guidance.
+- `references/strict-mode.md` - the strict rule set and checklist, with explicit fidelity precedence.
+- `references/worked-example.md` - the worked Pass 1 / Pass 2 example, corrected to preserve advice and avoid added facts.
+- `scripts/ste_check.py` - the linter, with contextual modal suggestions.
+- `evals/` - the original four cases, with corrected fidelity expectations. The bulk-status, PR-template and protected-text cases are local additions.
 - `assets/ste100-overview.png` - the STE overview graphic.
 - `LICENSE` - the MIT license text.
 - `SKILL.md`, roughly 80 percent: the method tables for Pass 1 §1 to §26 and Pass 2 S1 to S15, the modes, the how-to-work steps, the fidelity rules, the voice guidance, and the when-not-to-act list are Dodaios's text. The method itself is Andrej Karpathy's "80% of the way to ASD-STE100" idea.

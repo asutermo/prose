@@ -18,7 +18,6 @@ is skipped with a warning; the generic secret scan still runs.
 import os
 import re
 import sys
-import difflib
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -55,6 +54,7 @@ SYNC_PAIRS = [
     "references/worked-example.md",
     "references/user-facing-docs.md",
     "scripts/ste_check.py",
+    "scripts/check_prose.py",
 ]
 
 
@@ -62,10 +62,11 @@ def load_blocklist():
     if not os.path.exists(BLOCKLIST_PATH):
         return None
     entries = []
-    for line in open(BLOCKLIST_PATH, encoding="utf-8"):
-        line = line.strip()
-        if line and not line.startswith("#"):
-            entries.append(line)
+    with open(BLOCKLIST_PATH, encoding="utf-8") as handle:
+        for line in handle:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                entries.append(line)
     return entries
 
 
@@ -90,18 +91,20 @@ def scan_secrets():
         if rel == "scripts/private-blocklist.local":  # the blocklist lists the private strings itself
             continue
         try:
-            text = open(path, encoding="utf-8", errors="replace").read()
+            with open(path, encoding="utf-8", errors="replace") as handle:
+                text = handle.read()
         except OSError:
+            findings.append(f"{rel}: unable to read")
             continue
         for label, pattern in SECRET_PATTERNS:
             for m in pattern.finditer(text):
                 line = text[: m.start()].count("\n") + 1
-                findings.append(f"{rel}:{line}  secret-shaped: {label}  {m.group(0)[:24]}...")
+                findings.append(f"{rel}:{line}  secret-shaped: {label}")
         if blocklist:
             for needle in blocklist:
                 for m in re.finditer(re.escape(needle), text, re.I):
                     line = text[: m.start()].count("\n") + 1
-                    findings.append(f"{rel}:{line}  forbidden content: {needle}")
+                    findings.append(f"{rel}:{line}  forbidden content")
     return findings
 
 
@@ -119,7 +122,10 @@ def check_sync():
                 hermes = cand
                 break
     if not hermes:
-        print("sync: no installed skill copy found; pass HERMES_SKILLS_DIR to check")
+        findings.append("sync: no installed skill copy found; pass HERMES_SKILLS_DIR to check")
+        return findings
+    if not os.path.isdir(hermes):
+        findings.append("sync: installed skill directory missing")
         return findings
     for rel in SYNC_PAIRS:
         a = os.path.join(REPO, rel)
@@ -130,11 +136,12 @@ def check_sync():
         if not os.path.exists(b):
             findings.append(f"sync: installed copy missing: {rel}")
             continue
-        ta = open(a, encoding="utf-8", errors="replace").read().replace("\r\n", "\n")
-        tb = open(b, encoding="utf-8", errors="replace").read().replace("\r\n", "\n")
+        with open(a, encoding="utf-8", errors="replace") as handle:
+            ta = handle.read().replace("\r\n", "\n")
+        with open(b, encoding="utf-8", errors="replace") as handle:
+            tb = handle.read().replace("\r\n", "\n")
         if ta != tb:
-            diff = list(difflib.unified_diff(tb.splitlines(), ta.splitlines(), "installed", "repo", lineterm="", n=0))
-            findings.append("sync: differs: {} ({} diff lines)\n    {}".format(rel, len(diff) - 2, "\n    ".join(diff[2:10])))
+            findings.append(f"sync: differs: {rel}")
     return findings
 
 

@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: pr-repository-template
+expected_outcome: |
+  A PR body that follows the supplied repository template, keeps its headings and order, and reports the observed unit-test result separately from unrun integration tests and unknown CI. No invented before/after evidence, approvals, or merge readiness.

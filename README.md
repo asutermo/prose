@@ -16,18 +16,18 @@ Prose is one agent skill for every text a person reads: single documents, bulk s
 **After:**
 > A liveness probe tells the kubelet if a container is healthy. If the probe fails, the kubelet restarts the container. This keeps the application available.
 >
-> A bad probe can also cause many restarts. For example, a timeout that is too short makes healthy containers fail the probe. To prevent this, set `initialDelaySeconds` and `failureThreshold` to values that fit your application.
+> Misconfigured probes could cause cascading restarts. You should tune parameters such as `initialDelaySeconds` and `failureThreshold` carefully.
 
 The goal is text that people read easily. Getting past AI detectors is not a goal.
 
 ## Why two passes
 
-Most humanizers only remove phrases. The text loses "Great question!" and "seamless", but it keeps long sentences that carry three ideas, hide the actor and stack hedges. It still reads like AI. You can see it in the worked example in [SKILL.md](SKILL.md):
+Removing chatbot phrases can leave long sentences that hide the actor and stack hedges. The [worked example](references/worked-example.md) shows how both passes help:
 
 | Step | What is left |
 |---|---|
 | Original | Chatbot opener, dash, "not just X", "-ing" rider, "however", "could potentially", dramatic closer |
-| After Pass 1 (tells) | "...the container will be automatically restarted by the kubelet, which keeps your application available. Misconfigured probes can cause cascading restarts, so parameters ... should be carefully tuned." Clean words, but heavy sentences. |
+| After Pass 1 (tells) | "...the container will be automatically restarted by the kubelet, which keeps your application available. Misconfigured probes could cause cascading restarts, so parameters ... should be carefully tuned." Clean words, but heavy sentences. |
 | After Pass 2 (STE80) | Short sentences, one idea each, active voice, the instruction apart from the description. |
 
 ## The method: what Karpathy said
@@ -98,12 +98,7 @@ npx skills add asutermo/prose --global --agent '*'
 
 Without `--global`, the skill goes into the current project only. The [skills CLI](https://github.com/vercel-labs/skills) from Vercel works with Claude Code, Codex, Cursor, OpenCode and many more agents.
 
-### Claude Code plugin
-
-```
-/plugin marketplace add asutermo/prose
-/plugin install prose@prose
-```
+For Claude Code, use the skills CLI command above. This repository does not ship a Claude plugin marketplace or plugin manifest.
 
 ### Claude.ai and Claude Desktop
 
@@ -135,50 +130,50 @@ Does this email sound like AI? Just tell me, don't rewrite it.
 
 **Match your voice.** Add a sample of your own writing. The skill then matches your sentence length, words and punctuation.
 
-**Fidelity first.** The skill keeps every fact, keeps "may" as "may", keeps "40+" as "40+", adds nothing and flags contradictions in the source. In our tests, this was the clearest difference from a plain prompt (see Tests).
+**Fidelity first.** The skill instructs the agent to keep facts, uncertainty, advice, permission and exact values such as "40+". These rules take priority over style, including Strict mode. Review the result against the source. The Tests section describes the available evaluation cases.
 
-## Pass 1: the 26 AI tells
+## Pass 1: the 31 AI tells
 
 | # | Tell | Before | After |
 |---|---|---|---|
 | **A. Staging instead of stating** ||||
-| 1 | **Not X but Y** | It's not just a faster build tool, it's a new way to think. | The build tool caches each step. |
-| 2 | **One-line closers** | ...No cold starts. No excuses. That's the power of the edge. | Latency dropped to 40 ms. |
-| 3 | **Sayings that sound deep** | At its core, observability is the language of trust. | Shared dashboards show both teams the same data. |
-| 4 | **Staged run-up** | Let's dive in. Here's what you need to know. | The API allows 100 requests per minute. |
-| 5 | **Arguing with no one** | To be clear, I'm not saying microservices are bad... | We split the billing service out first. |
+| 1 | **Not X but Y** | It's not just a faster build tool. It caches each step. | The faster build tool caches each step. |
+| 2 | **One-line closers** | Latency dropped to 40 ms. That's the real win. | Latency dropped to 40 ms. |
+| 3 | **Sayings that sound deep** | Observability is the language of trust. Shared dashboards show both teams the same data. | Shared dashboards show both teams the same data. |
+| 4 | **Staged run-up** | Let's dive in. The API allows 100 requests per minute. | The API allows 100 requests per minute. |
+| 5 | **Arguing with no one** | To be clear, we split the billing service out first. | We split the billing service out first. |
 | **B. Rhythm by rule** ||||
-| 6 | **Forced triads** | fast, intuitive, and powerful | loads in under a second |
-| 7 | **Repeated openings** (*weak alone*) | It reads... It checks... It starts... | It reads the config and checks the schema. |
+| 6 | **Forced triads** | Three powerful features: search, filters, and CSV export. | Features include search, filters, and CSV export. |
+| 7 | **Repeated openings** (*weak alone*) | It reads the config. It checks the schema. It starts the server. | It reads the config, checks the schema and starts the server. |
 | 8 | **Dashes everywhere** | The migration — which took six weeks — is done. | The migration took six weeks and is done. |
-| 9 | **Stacked qualifiers** (*weak alone*) | could potentially possibly cause | can break |
+| 9 | **Stacked qualifiers** (*weak alone*) | could potentially possibly cause failures | could cause failures |
 | 10 | **Hyphenated pairs** (*weak alone*) | The API is well-documented. | The API is well documented. |
 | 11 | **Passive, missing subjects** (*weak alone*) | No account needed. | You do not need an account. |
 | **C. Inflation and borrowed authority** ||||
-| 12 | **Overused AI words** | leverages a robust caching layer, showcasing... | caches API responses on the device |
-| 13 | **Inflated significance** | marks a pivotal moment in the project's journey | adds a CLI and drops Node 16 |
-| 14 | **Vague association** | The outage was linked to the DNS change. | The DNS change caused the outage. |
+| 12 | **Overused AI words** | leverages a caching layer for API responses | caches API responses |
+| 13 | **Inflated significance** | A pivotal moment: version 2.0 adds a CLI and drops Node 16. | Version 2.0 adds a CLI and drops Node 16. |
+| 14 | **Vague association** | The outage was linked to the DNS change. | Keep this wording unless the source establishes the cause. |
 | 15 | **Shallow -ing riders** | ..., highlighting its commitment to accessibility | (cut) |
-| 16 | **Sales language** | our groundbreaking, world-class editor | The editor runs inside VS Code. |
-| 17 | **Borrowed authority** | Experts agree... featured in TechCrunch, Wired... | It was on the front page of Hacker News in May. |
-| 18 | **Avoiding is / has** | serves as the central hub and boasts 40 options | holds the settings. It has 40 options. |
+| 16 | **Sales language** | Our groundbreaking editor runs inside VS Code. | The editor runs inside VS Code. |
+| 17 | **Borrowed authority** | Experts agree it's the future. It was on the Hacker News front page in May. | It was on the Hacker News front page in May. |
+| 18 | **Avoiding is / has** | The folder serves as the settings hub and boasts 40 options. | The folder holds the settings. It has 40 options. |
 | **D. Formatting by rule** ||||
-| 19 | **Bold as decoration** | **Performance:** Performance has been improved. | The release makes pages load faster. |
-| 20 | **Decorative headings** | ## 🚀 Getting Started With The CLI → | ## Install the CLI |
+| 19 | **Bold as decoration** | **Performance:** Pages now load faster. | Pages now load faster. |
+| 20 | **Decorative headings** | ## 🚀 Getting Started With The CLI → | ## Getting started with the CLI |
 | 21 | **Curly quotes** (*weak alone*) | “true” | "true" |
 | **E. Leftovers from the chat and the draft** ||||
 | 22 | **Chatbot residue** | Great question! ... I hope this helps! | (cut the wrapper) |
 | 23 | **Knowledge-limit hedges** | While details are limited, it was likely created around 2015. | The sources do not say. |
 | 24 | **Heading repeated** | ## Security / Security is important. | (cut the line) |
-| 25 | **Writing about the document** | This function was added to replace the old approach... | This function looks up users in a hash map. |
+| 25 | **Writing about the document** | This function was added to look up users in a hash map. | This function looks up users in a hash map. |
 | **F. Writing for the wrong reader** ||||
-| 26 | **Re-explaining what the reader knows** | A reply that walks through the whole diagnosis first | Agreed. I'll switch the job to UTC. |
+| 26 | **Re-explaining what the reader knows** | As you said, the job uses local time. I recommend UTC. | I recommend UTC. |
 | **G. Showmanship and false depth** ||||
-| 27 | **Forced metaphors** | The codebase is a garden we must tend. | Delete unused code and add the features users ask for. |
-| 28 | **Dramatic fragmentation** | The catalog, honestly priced. It just works. Every time. | The catalog is priced by usage, so you pay for the calls you make. |
-| 29 | **Rhetorical question, then answer** | What makes an API good? It comes down to predictability. | A good API is predictable, so developers know what comes back. |
-| 30 | **Sentence-opener tics** | So, the results were mixed. Interestingly, adoption went up. | The results were mixed: adoption rose, churn rose too. |
-| 31 | **Reassurance kickers** | You might not have tests yet. And that's okay. | Many teams add tests once regressions start costing real time. |
+| 27 | **Forced metaphors** | The codebase is a garden. Tend it by deleting unused code. | Delete unused code. |
+| 28 | **Dramatic fragmentation** | The catalog. Priced by usage. Per call. | The catalog is priced by usage, per call. |
+| 29 | **Rhetorical question, then answer** | What makes an API good? It comes down to predictability. | A good API is predictable. |
+| 30 | **Sentence-opener tics** | So, the results were mixed. Interestingly, adoption went up. | The results were mixed. Adoption went up. |
+| 31 | **Reassurance kickers** | You might not have tests yet. And that's okay. | You might not have tests yet. |
 
 ## Pass 2: the 15 STE80 rules
 
@@ -208,15 +203,15 @@ Single-document rules do not fix a list of 30 items. Full Stack Data Lab's five 
 
 1. **NVN order.** First noun is the subject, next verb the action, next noun the object. Shared subject gets dropped, items start with the verb in the expected tense.
 2. **Most important words first.** Readers see only the first two words of each item. Put what makes an item different at the front.
-3. **Same structure, same vocabulary.** One grammatical pattern and one word per concept across every item.
-4. **Variation only where it means something.** One template for all items. A deviation must encode a real difference in the data.
+3. **Same structure, same vocabulary.** Use comparable patterns and one word per concept. Preserve each item's completed, active or planned state.
+4. **Variation only where it means something.** Use consistent slots without inventing missing details or dropping facts to make items match.
 5. **Verb connotation matches purpose.** "Users complain" on a complaints dashboard, "Users love" on a praise dashboard.
 
 The full procedure is in [SKILL.md](SKILL.md), Part 2.
 
 ## Part 3: PR and commit text
 
-Adapted from Humanlayer's show-me skill (MIT). A PR body has three sections:
+Adapted from Humanlayer's show-me skill (MIT). Your requested format or repository template takes priority. Otherwise, the fallback PR body has three sections:
 
 - **Summary** - the smallest view that makes the point. Pseudocode for logic, a call tree for control flow, a component tree for UI, a shallow file tree for refactors, Mermaid for interactions. A diff when the surrounding shape already exists.
 - **Evidence** - before and after. Screenshots are S-tier. Execution output is A-tier: the exact test that failed and now passes.
@@ -242,9 +237,11 @@ It is a heuristic, not an AI detector and not a compliance checker.
 
 ## Tests
 
-`evals/` has four cases in the `claude plugin eval` format: a README rewrite, an explanation from scratch, a strict runbook and a casual LinkedIn post that does not mention STE. Run them with `claude plugin eval . --allow-tools Write,Edit,Bash`.
+`evals/` contains agent evaluation prompts and graders for rewrites, explanations, strict procedures, mixed-state bulk items and repository-specific PR templates. These are behavioral test definitions, not recorded results. A compatible evaluation harness must load this skill and run each prompt in an isolated workspace.
 
-What we saw: when the prompt names ASD-STE100, the base model already gets the style mostly right. The skill made the difference in fidelity. In the LinkedIn rewrite, the run without the skill invented a quote and changed "40+ customers" to "40-odd". The run with the skill kept every fact. In the README rewrite, it kept "you may need to" and flagged a contradiction in the source. These are small tests, so treat them as a hint, not proof.
+Run the dependency-free checker regression tests with `python -m unittest discover -s tests -v`. CI runs these tests and the generic secret scan. Style findings are advisory. Local tests do not measure model writing quality or verify an agent installation.
+
+The upstream STE80 skill reported better fidelity in small README and LinkedIn comparisons. Those observations predate these changes. This repository does not include the run artifacts needed to verify them or establish the current skill's quality.
 
 ## Limits
 
@@ -254,7 +251,9 @@ What we saw: when the prompt names ASD-STE100, the base model already gets the s
 
 ## Safety
 
-`scripts/check_prose.py` scans every file for secret-shaped strings and private content before any commit, and its `--sync` mode verifies the installed skill copy matches this repo. Operational notes from private work never enter the repo. See [AGENTS.md](AGENTS.md).
+`python scripts/check_prose.py` scans text files for supported secret patterns without printing matched values. Optional private-content rules live in the ignored `scripts/private-blocklist.local`, one substring per line. Without that file, the scanner warns and skips private-content checks. This heuristic does not guarantee that a repository is safe to publish.
+
+`python scripts/check_prose.py --sync` also compares the listed files against an installed copy. Set `HERMES_SKILLS_DIR` to the full installed `prose` directory when needed. A missing copy fails the requested sync check. See [AGENTS.md](AGENTS.md).
 
 ## Sources and credits
 
