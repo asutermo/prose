@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Scratch and local state
+*.log
+*.tmp
+scratch/
+.claude-plugin/
+.cursor-plugin/
+
+# Editor and OS
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+
+# Do not commit local skill-install copies or git worktrees
+hermes-skills/
+*.orig

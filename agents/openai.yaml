@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prose"
+  short_description: "Remove AI tells, rebuild sentences, fix bulk text and PR bodies"
+  default_prompt: "Use $prose to rewrite this text so it reads like a clear, careful human wrote it."
