@@ -21,3 +21,4 @@ desktop.ini
 # Do not commit local skill-install copies or git worktrees
 hermes-skills/
 *.orig
+*.local
