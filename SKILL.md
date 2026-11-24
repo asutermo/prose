@@ -174,7 +174,12 @@ Act on §26 only when you can see the conversation or the text is plainly a repl
 | 30 | Sentence-opener tics | So..., Look,, habitual And/But, "I think" when stating a fact, adverb openers (Interestingly, Importantly, Crucially) | Drop the opener and start with the substance. |
 | 31 | Reassurance kickers | "And that's okay.", "no shame in...", "you're not alone", "it's completely normal" | Make the point and stop. Trust the reader. |
 
-Marketing and blog clichés are the same tell at a different register: at the end of the day, when it comes to, in a world where, moving forward, circle back, deep dive, game-changer, double down, take a step back, on the same page, make no mistake, it turns out, let me be clear, navigate (for challenges), lean into, unpack (before analysis), straightforward (to describe anything). Replace each with the plain claim.
+Marketing and blog clichés are the same tell at a different register. Each one below gets replaced with the plain claim:
+
+- at the end of the day, when it comes to, in a world where, moving forward
+- circle back, deep dive, game-changer, double down, take a step back
+- on the same page, make no mistake, it turns out, let me be clear
+- navigate (for challenges), lean into, unpack (before analysis), straightforward (to describe anything)
 
 ## Pass 2: STE80 structure
 
@@ -240,23 +245,23 @@ Readers take first noun = subject, next verb = action, next noun = object. Anyth
 - Never lead with the object. "Login bug fixed by the agent" makes readers take "bug" as the subject first.
 
 ### 2. Put the most important words first
-Readers scan pages in an F shape (Nielsen 2006) and often see only the first two words of each item (Nielsen 2009).
+Readers scan pages in an F shape (Nielsen 2006). They often see only the first two words of each item (Nielsen 2009).
 - Find what makes each item DIFFERENT from the others. Move those words to the front.
 - Amazon order emails do this right: `Ordered: "Bounty Essentials..."`, not "Your order #1001 has shipped".
 
 ### 3. Same structure, same vocabulary
-Parallel structure reads faster (Frazier et al. 1984 and Sturt, Keller, Dubey 2010). Synonym drift makes readers wonder whether different words mean the same thing (Nielsen's fourth usability heuristic, and ASD-STE100 "one word, one meaning").
+Parallel structure reads faster (Frazier et al. 1984 and Sturt, Keller, Dubey 2010). Synonym drift makes readers wonder if different words mean the same thing (Nielsen's fourth usability heuristic, and ASD-STE100 "one word, one meaning").
 - One grammatical structure for every item: same opening pattern, same tense.
 - One word per concept across all items. Never "issue" in one row and "page" in another for the same thing.
 
 ### 4. Variation only where it means something
-Mackinlay's expressiveness principle (1986) applied to text: if one item differs in length, structure, or wording, readers assume the difference is significant.
+Mackinlay's expressiveness principle (1986) applied to text: if one item differs in length, structure, or wording, readers assume the difference carries meaning.
 - Use ONE template for all items. Fill each item's variable slots (subject, numbers, examples) into the same slots.
 - Uniform detail level: every item gets the same components (statement + one example), or none does. A version number in only one item implies only that item has versions.
 - Move per-item quantities (counts, review numbers) into a consistent position or a chart, not ad-hoc prose in some items.
 
 ### 5. Align verb connotation with purpose
-The verbs should make the artifact's purpose obvious from the verb alone (readers skim with low attention, and emotion words are recognized faster - Kousta, Vinson, Vigliocco 2009).
+The verbs should make the artifact's purpose obvious from the verb alone. Readers skim with low attention, and they recognize emotion words faster (Kousta, Vinson, Vigliocco 2009).
 - Complaints dashboard: "Users complain...". Praise dashboard: "Users love...".
 - Never label a mostly-negative theme with a positive opener. "Chess is a popular new draw" for a card that is all complaints hides the signal.
 
