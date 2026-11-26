@@ -223,6 +223,10 @@ Commit messages: subject in the repository's own shape, body with the why, and a
 
 Adapted from the landaire/config user-facing docs rules. The default reader is a user, not an auditor. A README opens with a short tl;dr, puts usage before contributor material, gives the common case with one example, leaves internal detail to a linked developer doc, uses a plain you/we voice, one idea per sentence, and never hard-wraps prose. The full rules are in [references/user-facing-docs.md](references/user-facing-docs.md).
 
+## Part 5: actionable output
+
+Adapted from the i-have-adhd skill by Ayoub Ghriss (MIT). For text the reader must act on - fixes, instructions, plans, step-by-step replies. Lead with the next action, number multi-step work, end with one concrete next action, suppress tangents, restate state every turn, give specific time estimates, make completed work visible, state errors matter-of-factly, cap visible lists to 5 items, and skip preamble, recap and closers. The full rules, the exceptions, and the pre-send check are in [references/actionable-output.md](references/actionable-output.md).
+
 ## Checker
 
 `scripts/ste_check.py` is a small Python linter with no dependencies. It flags many Pass 1 tells, such as not-X-but-Y, chatbot phrases, run-ups, fake depth, stacked hedges, vague authority and association, "-ing" riders, inflated claims, AI words, hyphen pairs and curly quotes. It also flags the measurable Pass 2 rules: sentence and paragraph length, semicolons, dashes, passive voice, perfect and progressive tenses, "-ing" forms and phrasal verbs.
@@ -265,6 +269,7 @@ The upstream STE80 skill reported better fidelity in small README and LinkedIn c
 - Shreya Shankar, "Five Principles for Generating Readable AI Text in Bulk", Full Stack Data Lab, 29 October 2026: https://fsdatalab.github.io/blog/agent-text-at-scale/
 - [humanlayer/skills](https://github.com/humanlayer/skills) show-me skill by Dex Horthy (MIT). Part 3 adapts its PR-body template. Its license notice is in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 - [landaire/config](https://github.com/landaire/config) CLAUDE.md. Part 4 adapts its user-facing docs rules.
+- [i-have-adhd](https://github.com/ayghri/i-have-adhd) by Ayoub Ghriss (MIT). Part 5 adapts its actionable-output rules. Its license notice is in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 - Prose is not a fork of any of these. It is a standalone skill that started from [Dodaios/ste80-humanizer](https://github.com/Dodaios/ste80-humanizer) v4 (MIT) and grew the bulk-text, PR and user-facing-docs parts on top. The upstream repo remains the home of the STE-only variant.
 
 ## Disclaimer
