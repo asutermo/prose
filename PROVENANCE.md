@@ -32,3 +32,7 @@ The Dodaios, blader/humanizer and Humanlayer material is MIT-licensed. Reuse wit
 ## Relation to the upstream skill
 
 `prose` is not a fork of Dodaios/ste80-humanizer and does not represent it. The upstream repo remains the home of the STE-only variant, unchanged.
+
+## Added in this repository (v5.4.0)
+
+- `SKILL.md` Part 5 and `references/actionable-output.md`: actionable-output rules for a reader with ADHD, adapted from the i-have-adhd skill by Ayoub Ghriss (https://github.com/ayghri/i-have-adhd, MIT). Wording is adapted, not copied.

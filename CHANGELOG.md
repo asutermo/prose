@@ -1,4 +1,11 @@
 # Changelog
+## 5.4.0
+
+- New Part 5: actionable output for a reader with ADHD, adapted from the i-have-adhd skill by Ayoub Ghriss (MIT). Ten rules: lead with the next action, number multi-step work, end with one concrete next action, suppress tangents, restate state every turn, specific time estimates, visible wins, matter-of-fact errors, capped visible lists, no preamble or closers. Includes when to break the rules and a pre-send check.
+- New `references/actionable-output.md` with the full rules, exceptions, and pre-send check.
+- Attribution added to SKILL.md metadata, PROVENANCE.md, THIRD_PARTY_NOTICES.md and README.md.
+- Part 5 reconciled with the rest of the skill: no wrapper-question endings (§22), no semicolons (S15), restate-state distinguished from recap, time estimates never added to rewrites, sample-voice and fidelity precedence stated, list caps keep every step.
+
 ## 5.3.0
 
 - Fidelity rules now override every style rule and Strict mode. The skill keeps advice, permission, conditions and association as written.

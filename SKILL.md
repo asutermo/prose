@@ -3,14 +3,15 @@ name: prose
 description: "Use when writing or editing any prose a human reads."
 license: MIT
 metadata:
-  version: "5.3.0"
-  author: "asutermo, Dodaios, Siqi Chen, Shreya Shankar, Dex Horthy"
+  version: "5.4.0"
+  author: "asutermo, Dodaios, Siqi Chen, Shreya Shankar, Dex Horthy, Ayoub Ghriss"
   sources:
     - "Five Principles for Generating Readable AI Text in Bulk, Shreya Shankar, Full Stack Data Lab (Oct 29, 2026) - https://fsdatalab.github.io/blog/agent-text-at-scale/"
     - "ste80-humanizer v4 (Dodaios), 80%-of-ASD-STE100 method per Andrej Karpathy"
     - "humanizer v2.5.1 (Siqi Chen, https://github.com/blader/humanizer), from Wikipedia 'Signs of AI writing'"
     - "PR body template from Humanlayer show-me skills (Dex Horthy, https://github.com/humanlayer/skills)"
     - "User-facing docs rules adapted from landaire/config CLAUDE.md (https://github.com/landaire/config)"
+    - "Actionable-output rules adapted from i-have-adhd (Ayoub Ghriss, https://github.com/ayghri/i-have-adhd, MIT)"
 ---
 
 # Prose
@@ -24,15 +25,17 @@ Rewrite AI-sounding text so it reads like a careful person wrote it, and so the 
 - Single free-form prose: docs, READMEs, emails, posts, answers. The user asks to humanize, de-AI, de-slop, tighten, or simplify text.
 - Bulk skimmable text: any set of repeated items a human scans - session titles, table cells, issue summaries, email subjects, changelog entries, dashboard cards, report sections, status feeds.
 - PR and commit text: pull-request bodies and commit messages for a change.
-- All three layers compose. A PR body uses Part 1 for its prose, Part 2 for its bullet lists, Part 3 for its structure.
+- Actionable output: instructions, fixes, and step-by-step replies a reader must act on (Part 5). Especially when the reader has ADHD.
+- All layers compose. A PR body uses Part 1 for its prose, Part 2 for its bullet lists, Part 3 for its structure.
 
-The skill has two passes plus three extensions:
+The skill has two passes plus four extensions:
 
 - **Pass 1 (§1 to §31)** removes AI tells: habits that people recognize as machine writing.
 - **Pass 2 (S1 to S15)** rebuilds sentences with the structure of ASD-STE100, softened to 80%.
 - **Part 2** applies the five readability principles to any list, table, or feed of items.
 - **Part 3** is the PR body and commit message template.
 - **Part 4** covers user-facing docs such as READMEs, where the reader is a user, not an auditor.
+- **Part 5** shapes actionable output for a reader with ADHD.
 
 Report your edits by these numbers. *Weak alone* means: act only when other tells are near it.
 
@@ -334,6 +337,31 @@ Default assumption: the reader is a user of the project, not an auditor. Write f
 - Link external tools and projects the first time they appear.
 - Do not hard-wrap prose. One line per paragraph.
 - American English only.
+
+## Part 5: Actionable output (ADHD reader)
+
+Source: the i-have-adhd skill by Ayoub Ghriss (github.com/ayghri/i-have-adhd, MIT), adapted. Full rules, exceptions, and pre-send check in references/actionable-output.md.
+
+Applies to text the reader must act on: fixes, instructions, plans, step-by-step replies. It governs text you write now. When editing existing prose, the fidelity rules come first and Part 5 changes only the reply's own shape, never the edited text. It also does not touch the changes list that "How to work" requires: that list is the work record, not a recap.
+
+Five facts drive it: working memory is small, knowing is not doing, starting is the hardest step, vague time estimates fail, and buried wins do not register.
+
+1. Lead with the next action, not context or a plan.
+2. Number multi-step work. One bounded action per step. Fewest steps that work.
+3. End with one concrete next action the reader can do in under two minutes. This ending is not a closer: state it as an instruction, never as a wrapper question (§22).
+4. Suppress tangents. Finish the first issue, then raise the second as its own topic.
+5. Restate state every turn: "Step 3 of 5 done: X. Next: Y." State where we are and what is next. Do not narrate what you did beyond the one line it takes to place the reader.
+6. Give specific time estimates: "15 minutes," never "a bit." Only in text you write now.
+7. Make completed work visible in concrete terms.
+8. State errors matter-of-factly: cause and fix. No "Uh oh," no "There seems to be a problem."
+9. Cap visible lists to 5 items, most relevant first. A longer procedure becomes ordered groups of five, and every step stays. Shapes presentation only, never omit relevant items.
+10. No preamble, no recap, no closers. Start with the answer. End when the answer is done.
+
+A user writing sample overrides Part 5's wording and tone, not its structure. Fidelity rules override everything here.
+
+Break the rules when the reader asks for a full explanation, a destructive action needs confirmation, a debug spiral needs a diagnostic question, the answer itself is the options list, or the harness requires something else. The shape stays either way.
+
+Before sending: delete the announcing opener, the "anything else?" closer, any "by the way" sidebar, empty hedges, and idioms. Then check that first line and last line alone answer (a) what to do next and (b) what just happened.
 
 ## Checker
 
